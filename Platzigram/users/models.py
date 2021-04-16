@@ -8,8 +8,7 @@ from django.db import models
 class Profile(models.Model):
     """Profile model.
 
-    proxy model that extends the base data with
-    other information"""
+     Model 1:1 with User"""
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     website = models.URLField(max_length=200, blank=True)

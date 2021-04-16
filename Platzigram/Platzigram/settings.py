@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     # Local apps
     "posts",
-    "users"
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -53,6 +53,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # My middlewares
+    "Platzigram.middleware.ProfileCompletionMiddleware",
 ]
 
 ROOT_URLCONF = 'Platzigram.urls'
