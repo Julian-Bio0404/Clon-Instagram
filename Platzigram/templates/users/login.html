@@ -19,7 +19,10 @@
             <div class="form-group">
                 <input  class="form-control" type="password" placeholder="Password" name="password"/>
             </div>
+
             <button class="btn btn-primary btn-block mt-5" type="submit">Sign in!</button>
         </form>
+
+        <p class="mt-4">Don't have an account yet? <a href="{% url 'signup' %}">Sign up here.</a></p>
 
 {% endblock %}
