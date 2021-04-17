@@ -10,7 +10,7 @@
         <p class="alert alert-danger">{{ error }}</p>
     {% endif %}
 
-        <form method="POST" action="{% url 'login' %}">
+        <form action="{% url 'users:login' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
                 <input  class="form-control" type="text" placeholder="Username" name="username" />
@@ -23,6 +23,6 @@
             <button class="btn btn-primary btn-block mt-5" type="submit">Sign in!</button>
         </form>
 
-        <p class="mt-4">Don't have an account yet? <a href="{% url 'signup' %}">Sign up here.</a></p>
+        <p class="mt-4">Don't have an account yet? <a href="{% url 'users:signup' %}">Sign up here.</a></p>
 
 {% endblock %}
