@@ -11,7 +11,6 @@ from posts.models import Post
 class PostAdmin(admin.ModelAdmin):
     """Posts Admin model"""
 
-    list_display = ('pk', 'user', 'photo')
-    list_display_links = ('pk', 'user')
-    list_editable = ('photo',)
+    list_display = ('pk', 'user', "title", 'photo')
+    search_fields = ('title', 'user__username', "user__email")
     list_filter = ('created', 'modified')
