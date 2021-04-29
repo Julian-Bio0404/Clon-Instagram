@@ -14,6 +14,12 @@
         <a href="" style="color: #000; font-size: 20px;">
             <i class="far fa-heart"></i>
         </a> 30 likes
+
+        {% if user == post.user %}
+            <a href="{% url 'posts:delete' post.pk %}" class="ml-5 btn btn-sm btn-outline-info">
+                Delete post
+            </a>
+        {% endif %}
     </p>
     <p class="ml-2 mt-0 mb-2">
         <b>{{ post.title }}</b> - <small>{{ post.created }}</small>

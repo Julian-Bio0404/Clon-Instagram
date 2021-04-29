@@ -12,7 +12,7 @@
             <div class="col-sm-4 d-flex justify-content-center">
                 <img
                     src="{{ user.profile.picture.url }}"
-                    alt="@{{ user.username}}"
+                    alt="@{{ user.username }}"
                     class="rounded-circle"
                     width="150px"
                 />
@@ -23,7 +23,7 @@
                     {{ user.username }}
                     {% if user == request.user %}
                         <a
-                            href="{% url 'users:update'  %}"
+                            href="{% url 'users:update' %}"
                             class="ml-5 btn btn-sm btn-outline-info"
                         >
                             Edit profile

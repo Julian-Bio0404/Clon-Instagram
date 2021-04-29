@@ -4,6 +4,7 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic.edit import DeleteView
 
 # Forms
 from posts.forms import PostForm
@@ -43,3 +44,16 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         context["user"] = self.request.user
         context["profile"] = self.request.user.profile
         return context
+
+
+class DeletePostView(LoginRequiredMixin, DeleteView):
+    """Delete a post."""
+
+    template_name = "posts/delete.html"
+    model = Post
+    success_url = reverse_lazy("posts:feed")
+
+    def get_object(self):
+        obj = super().get_object()
+        obj.delete()
+

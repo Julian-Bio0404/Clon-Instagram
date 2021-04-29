@@ -25,7 +25,7 @@ class Profile(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        """Return user."""
+        """Return username."""
         return self.user.username
 
 
