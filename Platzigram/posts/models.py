@@ -21,3 +21,15 @@ class Post(models.Model):
     def __str__(self):
         """Return title and username"""
         return "{} by @{}".format(self.title, self.user.username)
+
+
+class Comment(models.Model):
+    """Comment model."""
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    comment = models.TextField(blank=True)
+
+    def __str__(self):
+        """Return user and pk"""
+        return "{} by @{}".format(self.pk, self.user.username)
