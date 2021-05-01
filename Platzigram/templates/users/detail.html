@@ -40,15 +40,18 @@
 
                 <div class="row mt-2" style="font-size: 1.2em">
                     <div class="col-sm-4">
-                        <b>{{ user.profile.posts_count }}785</b> posts
+                        <b>{{ user.profile.count_post }}</b> posts
                     </div>
+
                     <div class="col-sm-4">
                         <b>{{ followers }}</b> followers
                     </div>
+
                     <div class="col-sm-4">
                         <b>{{ following }}</b> following
                     </div>
                 </div>
+                
                 <div class="row mt-4">
                     <div class="col-sm-12">
                         <p>{{ user.profile.biography }}</p>
