@@ -86,6 +86,12 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
         context["posts"] = Post.objects.filter(user=user).order_by("-created")
+
+        #  usr1=User.objects.get(username=usr)
+        user_id=(User.objects.get(username=user)).id
+        context['followers'] = Follow.objects.filter(following=user_id).count()
+        context['following'] = Follow.objects.filter(follower=user_id).count()
+       
         return context
 
 
