@@ -2,6 +2,7 @@
 
 # Django
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -15,7 +16,7 @@ from users.forms import SignupForm
 
 # Models
 from posts.models import Post
-from users.models import Profile
+from users.models import Profile, Follow
 
 
 def login_view(request):
@@ -87,3 +88,16 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         context["posts"] = Post.objects.filter(user=user).order_by("-created")
         return context
 
+
+def follow_user(request,user1,user2):
+    """current user= user2 , user to follow = user1 """
+
+    user_id1=User.objects.get(username=user1).id
+    user_id2=User.objects.get(username=user2).id
+
+    if Follow.objects.filter(following=user_id1, follower=user_id2).count()!=0:
+        Follow.objects.filter(following=user_id1, follower=user_id2).delete()
+    else:
+        Follow.objects.create(follower=user_id2,following=user_id1) 
+  
+    return HttpResponseRedirect(reverse('users:detail',args=[user1,]))
