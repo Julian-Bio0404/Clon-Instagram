@@ -87,6 +87,11 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         user = self.get_object()
         context["posts"] = Post.objects.filter(user=user).order_by("-created")
 
+         #conteo de publicaciones
+        usr = Profile.objects.get(user=user) 
+        usr.count_post = Post.objects.filter(user=user).count()
+        usr.save()
+
         #  usr1=User.objects.get(username=usr)
         user_id=(User.objects.get(username=user)).id
         context['followers'] = Follow.objects.filter(following=user_id).count()
@@ -95,6 +100,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
+@login_required
 def follow_user(request,user1,user2):
     """current user= user2 , user to follow = user1 """
 
