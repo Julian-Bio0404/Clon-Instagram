@@ -41,4 +41,10 @@ urlpatterns = [
         name="detail"
     ),
 
+    path(
+        route='<str:user1>/<str:user2>/',
+        view=views.follow_user,
+        name='follow'
+    ),
+
 ]
