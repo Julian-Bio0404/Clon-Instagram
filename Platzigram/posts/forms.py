@@ -20,7 +20,9 @@ class PostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     """Comment model form."""
 
+    comment = forms.CharField(widget=forms.Textarea)
+
     class Meta:
         model = Comment
-        fields = ("user", "profile", "comment")
+        fields = ("user", "profile", 'post', "comment")
 
