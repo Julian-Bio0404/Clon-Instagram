@@ -7,7 +7,7 @@ from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.edit import DeleteView
 
 # Forms
-from posts.forms import PostForm
+from posts.forms import PostForm, CommentForm
 
 # Models
 from posts.models import Post
@@ -28,7 +28,13 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 
     template_name = "posts/detail.html"
     queryset = Post.objects.all()
-    context_object_name = "post"
+    context_object_name = "posts"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(post=self.get_object()).all()
+        context['form_comments'] = CommentForm()
+        return context
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
