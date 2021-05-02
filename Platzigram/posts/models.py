@@ -28,6 +28,7 @@ class Comment(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     comment = models.TextField(blank=True)
 
     def __str__(self):
