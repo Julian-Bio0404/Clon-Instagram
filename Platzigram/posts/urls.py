@@ -37,5 +37,11 @@ urlpatterns = [
         route="posts/delete/<int:pk>",
         view=views.DeletePostView.as_view(),
         name="delete"
+    ),
+
+    path(
+        route='<str:user>/<int:pk>/', 
+        view=views.give_a_like,
+        name="like"
     )
 ]

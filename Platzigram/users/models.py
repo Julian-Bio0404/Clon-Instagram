@@ -18,8 +18,8 @@ class Profile(models.Model):
         upload_to="users/pictures", 
         blank=True, 
         null=True
-        )
-        
+    )
+
     count_post = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -35,5 +35,3 @@ class Follow(models.Model):
 
     follower = models.IntegerField(default=0)
     following = models.IntegerField(default=0)
-
-

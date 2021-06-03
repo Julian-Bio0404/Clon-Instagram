@@ -87,13 +87,13 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         user = self.get_object()
         context["posts"] = Post.objects.filter(user=user).order_by("-created")
 
-         #conteo de publicaciones
-        usr = Profile.objects.get(user=user) 
-        usr.count_post = Post.objects.filter(user=user).count()
-        usr.save()
+        # conteo de publicaciones
+        profile = Profile.objects.get(user=user) 
+        profile.count_post = Post.objects.filter(user=user).count()
+        profile.save()
 
-        #  usr1=User.objects.get(username=usr)
-        user_id=(User.objects.get(username=user)).id
+        # conteo de followers y following
+        user_id = User.objects.get(username=user).id
         context['followers'] = Follow.objects.filter(following=user_id).count()
         context['following'] = Follow.objects.filter(follower=user_id).count()
        
@@ -101,15 +101,16 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
 
 @login_required
-def follow_user(request,user1,user2):
-    """current user= user2 , user to follow = user1 """
+def follow_user(request, user1, user2):
+    """Follow view.
+    Allow to follow or unfollow a user
+    current user= user2 , user to follow = user1 """
 
-    user_id1=User.objects.get(username=user1).id
-    user_id2=User.objects.get(username=user2).id
+    user_id1 = User.objects.get(username=user1).id
+    user_id2 = User.objects.get(username=user2).id
 
-    if Follow.objects.filter(following=user_id1, follower=user_id2).count()!=0:
+    if Follow.objects.filter(following=user_id1, follower=user_id2).count()!= 0:
         Follow.objects.filter(following=user_id1, follower=user_id2).delete()
     else:
         Follow.objects.create(follower=user_id2,following=user_id1) 
-  
-    return HttpResponseRedirect(reverse('users:detail',args=[user1,]))
+    return HttpResponseRedirect(reverse('users:detail', args=[user1,]))

@@ -15,12 +15,21 @@ class Post(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     photo = models.ImageField(upload_to="posts/photos")
+    likes = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         """Return title and username"""
         return "{} by @{}".format(self.title, self.user.username)
+
+
+class Like(models.Model):
+    """Like model."""
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    created = models.DateTimeField(auto_now_add=True)
 
 
 class Comment(models.Model):
@@ -30,7 +39,8 @@ class Comment(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     comment = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        """Return user and pk"""
-        return "{} by @{}".format(self.pk, self.user.username)
+        """Return username, post title and comment."""
+        return "{} by @{}".format(self.user.username, self.post.title, self.comment)
