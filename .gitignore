@@ -1,2 +1,4 @@
 env/
-media/
+Platzigram/media/
+Platzigram/users/pictures/
+Platzigram/db.sqlite3

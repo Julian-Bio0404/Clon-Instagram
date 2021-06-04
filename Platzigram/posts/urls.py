@@ -16,12 +16,6 @@ urlpatterns = [
     ),
 
     path(
-        route='posts/save_comment',
-        view=views.save_comment,
-        name='save_comment'
-    ),
-
-    path(
         route="posts/new/",
         view=views.CreatePostView.as_view(), 
         name="create"
@@ -40,8 +34,20 @@ urlpatterns = [
     ),
 
     path(
-        route='<str:user>/<int:pk>/', 
+        route="<str:user>/<int:pk>/", 
         view=views.give_a_like,
         name="like"
-    )
+    ),
+
+    path(
+        route="posts/save_comment",
+        view=views.comment,
+        name="save_comment"
+    ),
+
+    path(
+        route="posts/delete_comment/<int:pk>",
+        view=views.comment,
+        name="delete_comment"
+    ),
 ]

@@ -20,7 +20,7 @@ class PostAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     """Comment Admin model."""
 
-    list_display = ('pk', 'user', "profile")
+    list_display = ('pk', 'user', "post", "comment")
 
 
 @admin.register(Like)

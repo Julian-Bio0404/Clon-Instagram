@@ -20,7 +20,13 @@
 
                                 <div class="media-body">
                                     <h5 class="mt-0">{{comment.user.username}}</h5>
-                                    <p class="mt-1 ml-6" >{{comment.comment}} | {{comment.created}}</p>
+                                    <p class="mt-1 ml-6" >{{comment.comment}} | {{comment.created}}
+                                        {% if user == comment.user %}
+                                            <a href="{% url 'posts:delete_comment' comment.pk %}" class="ml-5 btn btn-sm btn-outline-info">
+                                                delete comment
+                                            </a>
+                                        {% endif %}
+                                    </p>
                                 </div>
                             </div>
                         {% endfor %}

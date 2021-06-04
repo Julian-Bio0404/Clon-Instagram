@@ -57,9 +57,10 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
 
 @login_required
-def save_comment(request):
-    """Save comments."""
+def comment(request, pk=None):
+    """Save or delete comments."""
 
+    # Comentar
     if request.method == 'POST':
         post = {
             "user": request.user.id,
@@ -73,6 +74,12 @@ def save_comment(request):
         if form.is_valid():
             form.save()
             return redirect("posts:feed")
+
+    # Eliminar comentario
+    elif request.method == "GET":
+        comment = Comment.objects.filter(pk=pk)
+        comment.delete()
+        return redirect("posts:feed")
     else:
         return HttpResponse(status=405)
     return HttpResponse(status=500)
