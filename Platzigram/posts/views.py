@@ -15,16 +15,24 @@ from posts.forms import PostForm, CommentForm
 
 # Models
 from posts.models import Post, Comment, Like
+from users.models import Follow
 
 
 class PostsFeedView(LoginRequiredMixin, ListView):
-    """Return all published posts."""
+    """Return all posts published by following."""
 
     template_name = "posts/feed.html"
-    model = Post
     ordering = ("-created")
     paginate_by = 30
     context_object_name = "posts"
+
+    def get_queryset(self):
+        user = self.request.user
+        follows = Follow.objects.filter(follower=user.pk)
+        following = [follow.following for follow in follows]
+        following.append(user.id)
+        posts = Post.objects.filter(user__id__in=following)
+        return posts
 
 
 class PostDetailView(LoginRequiredMixin, DetailView):
