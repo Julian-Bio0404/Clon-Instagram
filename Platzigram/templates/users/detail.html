@@ -44,11 +44,11 @@
                     </div>
 
                     <div class="col-sm-4">
-                        <b>{{ followers }}</b> followers
+                        <b>{{ followers }}</b> <a href="{% url 'users:followers' user %}">followers</a>
                     </div>
 
                     <div class="col-sm-4">
-                        <b>{{ following }}</b> following
+                        <b>{{ following }}</b> <a href="{% url 'users:following' user %}">following</a>
                     </div>
                 </div>
                 

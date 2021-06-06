@@ -34,7 +34,7 @@ urlpatterns = [
         name="update"
     ),
 
-     # Posts
+    # Posts
     path(
         route="profile/<str:username>/",
         view=views.UserDetailView.as_view(),
@@ -42,9 +42,20 @@ urlpatterns = [
     ),
 
     path(
+        route="profile/<str:username>/followers/",
+        view=views.list_follow,
+        name="followers"
+    ),
+
+    path(
+        route="profile/<str:username>/following/",
+        view=views.list_follow,
+        name="following"
+    ),
+
+    path(
         route='<str:user1>/<str:user2>/',
         view=views.follow_user,
         name='follow'
-    ),
-
+    )
 ]

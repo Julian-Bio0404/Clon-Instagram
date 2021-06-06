@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>@{{ user.username }} | Platzigram</title>
+{% endblock %}
+
+{% block container %}
+<div class="container">
+    <div class="col-sm-12 col-md-4 offset-md-4 mt-5 p-5 post-container">
+        <div>
+            <h5>Following</h5>
+        </div>
+        <div class="media mb-3">
+            <h5>________________________</h5>
+        </div>
+        {% for following in following %}
+        <div class="media mb-3">
+            {% if following.profile.picture %}
+                <img class="d-flex mr-2 rounded-circle" width="40px" height="40px" src="/media/{{ following.profile.picture }}" alt="">
+            {% else %}
+                <img class="d-flex mr-2 rounded-circle" src="http://placehold.it/50x50" alt="">
+            {% endif %}
+            <div class="media-body">
+                <h7 class="mt-0">{{following.username}}</h7>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -76,7 +76,6 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
     template_name = "users/detail.html"
     slug_field = "username"
-    # slug_url_kwarg depende del nombre que le demos en la url de users Posts
     slug_url_kwarg = "username"
     queryset = User.objects.all()
     context_object_name = "user"
@@ -96,7 +95,6 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         user_id = User.objects.get(username=user).id
         context['followers'] = Follow.objects.filter(following=user_id).count()
         context['following'] = Follow.objects.filter(follower=user_id).count()
-       
         return context
 
 
@@ -114,3 +112,22 @@ def follow_user(request, user1, user2):
     else:
         Follow.objects.create(follower=user_id2,following=user_id1) 
     return HttpResponseRedirect(reverse('users:detail', args=[user1,]))
+
+
+@login_required
+def list_follow(request, username):
+    """Return all followers or following."""
+
+    user = User.objects.get(username=username)
+
+    if request.resolver_match.url_name == "followers":
+        follows = Follow.objects.filter(following=user.pk)
+        followers_id = [follow.follower for follow in follows]
+        followers = User.objects.filter(id__in=followers_id)
+        return render(request, "users/followers.html", {"followers":followers, "user":user})
+
+    elif request.resolver_match.url_name == "following":
+        follows = Follow.objects.filter(follower=user.pk)
+        following_id = [follow.following for follow in follows]
+        following = User.objects.filter(id__in=following_id)
+        return render(request, "users/following.html", {"following":following, "user":user})
