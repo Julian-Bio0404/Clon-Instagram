@@ -131,3 +131,12 @@ def list_follow(request, username):
         following_id = [follow.following for follow in follows]
         following = User.objects.filter(id__in=following_id)
         return render(request, "users/following.html", {"following":following, "user":user})
+
+
+def search_user(request):
+    """Search a user."""
+    queryset = request.GET.get("username")
+    if queryset:
+        users = User.objects.filter(username=queryset)
+        return render(request, "users/search.html", {"users": users} )
+    return render(request, "users/search.html")

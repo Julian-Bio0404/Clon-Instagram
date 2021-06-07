@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+<title>Platzigram</title>
+{% endblock %}
+
+{% block container %}
+<div class="container">
+    <div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-4 post-container">
+        <form method="GET">
+            <input class="form-control" type="text" placeholder="Username" name="username">
+        </form>
+    </div>
+    {% if users %}
+    <div class="col-sm-12 col-md-4 offset-md-4 mt-5 p-5 post-container">
+        <div>
+            <h5>Personas</h5>
+        </div>
+        <div class="media mb-3">
+            <h5>________________________</h5>
+        </div>
+        {% for user in users %}
+        <div class="media mb-3">
+            {% if user.profile.picture %}
+                <a href="{% url 'users:detail' user.username %}">
+                    <img class="d-flex mr-2 rounded-circle" width="40px" height="40px" src="/media/{{ user.profile.picture }}" alt="">
+                </a>
+            {% else %}
+                <a href="{% url 'users:detail' user.username %}">
+                    <img class="d-flex mr-2 rounded-circle" src="http://placehold.it/50x50" alt="">
+                </a>
+            {% endif %}
+
+            <div class="media-body">
+                <h7 class="mt-0">{{user.username}}</h7>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
