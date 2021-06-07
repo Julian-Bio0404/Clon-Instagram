@@ -7,6 +7,7 @@ from django import forms
 from django.contrib.auth.models import User
 from users.models import Profile
 
+
 class SignupForm(forms.Form):
     """Sign up form."""
 

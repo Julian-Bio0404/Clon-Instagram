@@ -12,7 +12,6 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         """Form settings."""
-
         model = Post
         fields = ("user", "profile", "title", "photo")
 
@@ -23,6 +22,7 @@ class CommentForm(forms.ModelForm):
     comment = forms.CharField(widget=forms.Textarea)
 
     class Meta:
+        """Form settings."""
         model = Comment
         fields = ("user", "profile", 'post', "comment")
 

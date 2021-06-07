@@ -16,9 +16,13 @@
         {% for follower in followers %}
         <div class="media mb-3">
             {% if follower.profile.picture %}
-                <img class="d-flex mr-2 rounded-circle" width="40px" height="40px" src="/media/{{ follower.profile.picture }}" alt="">
+                <a href="{% url 'users:detail' follower.username %}">
+                    <img class="d-flex mr-2 rounded-circle" width="40px" height="40px" src="/media/{{ follower.profile.picture }}" alt="">
+                </a>
             {% else %}
-                <img class="d-flex mr-2 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <a href="{% url 'users:detail' follower.username %}">
+                    <img class="d-flex mr-2 rounded-circle" src="http://placehold.it/50x50" alt="">
+                </a>
             {% endif %}
 
             <div class="media-body">

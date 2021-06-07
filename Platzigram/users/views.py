@@ -7,7 +7,6 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, FormView, UpdateView
 
@@ -86,7 +85,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         user = self.get_object()
         context["posts"] = Post.objects.filter(user=user).order_by("-created")
 
-        # conteo de publicaciones
+        # conteo de posts
         profile = Profile.objects.get(user=user) 
         profile.count_post = Post.objects.filter(user=user).count()
         profile.save()
@@ -133,6 +132,7 @@ def list_follow(request, username):
         return render(request, "users/following.html", {"following":following, "user":user})
 
 
+@login_required
 def search_user(request):
     """Search a user."""
     queryset = request.GET.get("username")

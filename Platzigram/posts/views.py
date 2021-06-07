@@ -22,7 +22,6 @@ class PostsFeedView(LoginRequiredMixin, ListView):
     """Return all posts published by following."""
 
     template_name = "posts/feed.html"
-    ordering = ("-created")
     paginate_by = 30
     context_object_name = "posts"
 
@@ -93,6 +92,7 @@ def comment(request, pk=None):
     return HttpResponse(status=500)
 
 
+@login_required
 def give_a_like(request, user, pk):
     """Like view.
     Allow you to like a post, 

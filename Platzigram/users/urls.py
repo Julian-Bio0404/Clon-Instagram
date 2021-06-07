@@ -34,7 +34,6 @@ urlpatterns = [
         name="update"
     ),
 
-    # Posts
     path(
         route="profile/<str:username>/",
         view=views.UserDetailView.as_view(),

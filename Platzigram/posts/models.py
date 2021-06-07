@@ -22,6 +22,10 @@ class Post(models.Model):
     def __str__(self):
         """Return title and username"""
         return "{} by @{}".format(self.title, self.user.username)
+    
+    class Meta:
+        """Meta class."""
+        ordering = ["-created"]
 
 
 class Like(models.Model):
@@ -30,6 +34,10 @@ class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Return title and username"""
+        return "{} has liked {}".format(self.user.username, self.post)
 
 
 class Comment(models.Model):
@@ -43,4 +51,4 @@ class Comment(models.Model):
 
     def __str__(self):
         """Return username, post title and comment."""
-        return "{} by @{}".format(self.user.username, self.post.title, self.comment)
+        return "@{} has commented {} on {}".format(self.user.username, self.comment, self.post)

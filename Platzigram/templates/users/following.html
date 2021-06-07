@@ -16,15 +16,20 @@
         {% for following in following %}
         <div class="media mb-3">
             {% if following.profile.picture %}
-                <img class="d-flex mr-2 rounded-circle" width="40px" height="40px" src="/media/{{ following.profile.picture }}" alt="">
+                <a href="{% url 'users:detail' following.username %}">
+                    <img class="d-flex mr-2 rounded-circle" width="40px" height="40px" src="/media/{{ following.profile.picture }}" alt="">
+                </a>
             {% else %}
-                <img class="d-flex mr-2 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <a href="{% url 'users:detail' following.username %}">
+                    <img class="d-flex mr-2 rounded-circle" src="http://placehold.it/50x50" alt="">
+                </a>
             {% endif %}
+
             <div class="media-body">
                 <h7 class="mt-0">{{following.username}}</h7>
             </div>
         </div>
+        {% endfor %}
     </div>
-{% endfor %}
 </div>
 {% endblock %}
