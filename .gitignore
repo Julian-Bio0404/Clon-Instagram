@@ -1,4 +1,5 @@
 env/
+__pycache__/
 Platzigram/media/
 Platzigram/users/pictures/
-Platzigram/db.sqlite3
+db.sqlite3
